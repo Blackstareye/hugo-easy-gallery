@@ -1,11 +1,8 @@
 {{/*  Debugging  */}}
-<pre>{{ jsonify (dict "indent" "  ") . }}</pre>
-{{/*  {{ $baseURL := .baseUrl }}
-{{ $pathImages := .pathImages }}
-{{ $directory := .directory }}  */}}
+{{/*  <pre>{{ jsonify (dict "indent" "  ") . }}</pre>
 <pre>{{ $.directory }}</pre>
 <pre>{{ $.pathImages }}</pre>
-<pre> URL: {{ $.baseUrl }}</pre>
+<pre> URL: {{ $.baseUrl }}</pre>  */}}
 <!-- If a directory was specified, generate figures for all of the images in the directory -->
 {{- $files := readDir $.pathImages }}
 {{- range $files -}}
@@ -13,12 +10,10 @@
 	<pre> {{.IsDir }}</pre>  */}}
 	{{- if .IsDir }}
 		{{/*  Do the same thing again  */}}
-		<h2> Oh lalala a directorrry {{ .Name }}</h2>
 		{{ $pathImages := (path.Join $.pathImages  .Name) }}
 		{{ $directory := (path.Join $.directory  .Name) }}
 		{{ partial "func/GetDir.html" (dict "thumb" $.thumb "directory" $directory "pathImages" $pathImages "baseUrl" $.baseUrl) }}
 	{{- else }}
-		<hr>
 		{{ 
 			partial "func/GetFile.html" 
 			(dict "thumb" $.thumb "directory" $.directory "baseUrl" $.baseUrl "pathImages" $.pathImages "Name" .Name "files" $files) 

@@ -6,11 +6,11 @@
 {{ $pathImages := .pathImages }}
 {{ $directory := .directory }}
 {{ $files := $.files }}
-<div> Entering Filemode:</div>
+{{/*  <div> Entering Filemode:</div>
 <pre>{{ $directory }}</pre>
 <pre>{{ $pathImages }}</pre>
 <pre>{{ .Name }}</pre>
-<pre> URL: {{ $baseURL }}</pre>
+<pre> URL: {{ $baseURL }}</pre>  */}}
 
 
 {{- $thumbext := $.thumb }}
@@ -25,10 +25,10 @@
 		{{- $absPathCaptionTxt := path.Join $pathImages $captionFileTxt }} 
 		{{- $captionFileMdE := os.FileExists $absPathCaptionMd }} 
 		{{- $captionFileTxtE := os.FileExists $absPathCaptionTxt }} 
-		<pre> 
+		{{/*  <pre> 
 			{{$absPathCaptionMd}} {{os.FileExists $absPathCaptionMd}} <br>
 			{{$absPathCaptionTxt}} {{os.FileExists $absPathCaptionTxt}} <br>
-		</pre>
+		</pre>  */}}
 		{{$caption := ""}}
 		{{- if  $captionFileMdE }}  
 			{{ $caption = os.ReadFile $absPathCaptionMd}}
