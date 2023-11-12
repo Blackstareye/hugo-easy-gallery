@@ -1,13 +1,9 @@
 {{/*  Debugging  */}}
-{{/*  <pre>{{ jsonify (dict "indent" "  ") . }}</pre>
-<pre>{{ $.directory }}</pre>
-<pre>{{ $.pathImages }}</pre>
-<pre> URL: {{ $.baseUrl }}</pre>  */}}
+{{/*  <pre>{{ jsonify (dict "indent" "  ") . }}</pre> */}}
+
 <!-- If a directory was specified, generate figures for all of the images in the directory -->
 {{- $files := readDir $.pathImages }}
 {{- range $files -}}
-	{{/*  <pre> {{.Name }}</pre>
-	<pre> {{.IsDir }}</pre>  */}}
 	{{- if .IsDir }}
 		{{/*  Do the same thing again  */}}
 		{{ $pathImages := (path.Join $.pathImages  .Name) }}

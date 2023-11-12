@@ -6,11 +6,6 @@
 {{ $pathImages := .pathImages }}
 {{ $directory := .directory }}
 {{ $files := $.files }}
-{{/*  <div> Entering Filemode:</div>
-<pre>{{ $directory }}</pre>
-<pre>{{ $pathImages }}</pre>
-<pre>{{ .Name }}</pre>
-<pre> URL: {{ $baseURL }}</pre>  */}}
 
 
 {{- $thumbext := $.thumb }}
@@ -19,26 +14,23 @@
 	
 
 	{{- if and $isimg (not $isthumb) }}
+		{{/*  Find a file with .md or .txt for description  */}}
 		{{- $captionFileMd :=  .Name | replaceRE "\\..*" ".md" }}  
 		{{- $captionFileTxt := .Name | replaceRE "\\..*" ".txt" }}  
 		{{- $absPathCaptionMd := path.Join $pathImages $captionFileMd }} 
 		{{- $absPathCaptionTxt := path.Join $pathImages $captionFileTxt }} 
 		{{- $captionFileMdE := os.FileExists $absPathCaptionMd }} 
 		{{- $captionFileTxtE := os.FileExists $absPathCaptionTxt }} 
-		{{/*  <pre> 
-			{{$absPathCaptionMd}} {{os.FileExists $absPathCaptionMd}} <br>
-			{{$absPathCaptionTxt}} {{os.FileExists $absPathCaptionTxt}} <br>
-		</pre>  */}}
+		
 		{{$caption := ""}}
 		{{- if  $captionFileMdE }}  
 			{{ $caption = os.ReadFile $absPathCaptionMd}}
 		{{- else if $captionFileTxtE }} 
-			<pre> File Detected </pre> 
 			{{ $caption = os.ReadFile $absPathCaptionTxt}}
-			<pre> {{ $caption }}</pre>
 		{{- else  }}
 			{{- $caption =  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
 		{{- end }}  
+
 		{{- $linkURL := print $baseURL $directory "/" .Name |  absURL }} <!-- absolute URL to hi-res image -->
 		{{- $thumb := .Name | replaceRE "(\\.)" ($thumbext | printf "%s.") }}<!-- filename of thumbnail image -->
 		{{- $thumbexists := where $files "Name" $thumb }}<!-- does a thumbnail image exist? --> 
