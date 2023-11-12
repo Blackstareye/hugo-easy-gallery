@@ -3,11 +3,13 @@
 
 
 {{ $baseURL := .baseUrl }}
-{{ $pathImages := (print "/static" .directory) }}
+{{ $pathImages := .pathImages }}
 {{ $directory := .directory }}
 {{ $files := $.files }}
+<div> Entering Filemode:</div>
 <pre>{{ $directory }}</pre>
 <pre>{{ $pathImages }}</pre>
+<pre>{{ .Name }}</pre>
 <pre> URL: {{ $baseURL }}</pre>
 
 

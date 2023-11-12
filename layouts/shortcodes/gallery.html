@@ -9,7 +9,8 @@ Documentation and licence at https://github.com/liwenyip/hugo-easy-gallery/
 {{ $thumb := .Get "thumb" | default "-thumb"}}
 <div class="gallery caption-position-{{ with .Get "caption-position" | default "bottom" }}{{.}}{{end}} caption-effect-{{ with .Get "caption-effect" | default "slide" }}{{.}}{{end}} hover-effect-{{ with .Get "hover-effect" | default "zoom" }}{{.}}{{end}} {{ if ne (.Get "hover-transition") "none" }}hover-transition{{end}}" itemscope itemtype="http://schema.org/ImageGallery">
 	{{- with (.Get "dir") -}}
-		{{ partial "func/GetDir.html" (dict "thumb" $thumb "directory" . "baseUrl" $baseURL) }}
+		{{ $pathImages := (path.Join "/static" .) }}
+		{{ partial "func/GetDir.html" (dict "thumb" $thumb "directory" . "pathImages" $pathImages "baseUrl" $baseURL) }}
 	{{- else -}}
 		<!-- If no directory was specified, include any figure shortcodes called within the gallery -->
 	  {{ .Inner }}
